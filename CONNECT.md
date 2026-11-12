@@ -1,9 +1,9 @@
 # Connect IST to Claude or ChatGPT
 
-**Current status:** This is a pilot guide. The service works with a direct
-Bearer token in isolated MCP tests, but HTN's actual Claude and ChatGPT connector
-settings and attachment handoff still need account-level verification. Your IST
-administrator supplies the production MCP URL and organization token separately.
+**Current status:** This is a pilot guide. The production MCP service accepts a
+direct Bearer token, but HTN's actual Claude and ChatGPT connector settings and
+attachment handoff still need account-level verification. Your IST administrator
+supplies the production MCP URL and organization token separately.
 
 ## What the administrator gives you
 

@@ -7,10 +7,10 @@ connecting to the IST MCP service and for asking it to check weekly data, run a
 transfer plan, explain results, and provide Excel reports. It contains **no
 service code, customer data, endpoint credential, or token**.
 
-**Pilot status:** The IST MCP service has passed isolated server tests. Connection
-and Excel attachment handling in HTN's actual Claude and ChatGPT workspaces are
-still being verified. An IST administrator will provide the MCP URL and shared
-organization token through a secure channel when your workspace is ready.
+**Pilot status:** The production IST MCP endpoint is live, and the server accepts
+the production organization token. Connection and Excel attachment handling in
+HTN's actual Claude and ChatGPT workspaces are still being verified. An IST
+administrator will provide the MCP URL and shared organization token privately.
 
 ## Start with your agent
 
