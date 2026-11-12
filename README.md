@@ -32,6 +32,7 @@ enable it once.
 - [Example conversations](docs/EXAMPLES.md)
 - [IST operating skill](skills/ist/SKILL.md)
 
-The HTN organization token is reusable across both chatbots. Keep it in each
-connector's secret setting, not in a prompt or file. Because the token is shared,
-IST can audit the organization action but cannot identify the individual planner.
+**Shared-token access:** The HTN organization token can upload data, change
+policy, and start runs in both chatbots. Keep it in each connector's secret
+setting, never in a prompt or file. IST records actions under one organization
+identity, so it cannot identify which planner made a change.

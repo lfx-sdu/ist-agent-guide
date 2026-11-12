@@ -38,6 +38,10 @@ The saved policy persists across future weeks until another confirmed change.
 
 ## Runs and reports
 
+- For a confirmed season exclusion or policy dial change, use `reallocate` if
+  a completed full run covers the current weekly inputs. If weekly sales or
+  order inputs changed, follow the upload's automatic `full` run; start `full`
+  when no usable full-run cache exists.
 - `start_run` returns an ID promptly. Reuse its idempotency key on retry. A run
   can take minutes; give the user the ID and use `get_run_status` later.
 - On completion, use the **same** ID for `get_run_results`, `query_plan`, and

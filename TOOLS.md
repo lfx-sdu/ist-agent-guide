@@ -29,9 +29,12 @@ require a separate, explicit user confirmation in chat.
   `run_id` in `get_import_job`; avoid a second `start_run` call.
 - Save a requested policy change **before** committing an upload that will
   automatically run, so that run captures the intended revision.
-- A `full` run rebuilds the forecast and allocation. `reallocate` uses the
-  cached forecast; use it only when IST has a completed full run and the change
-  affects allocation alone.
+- Excluding a season or changing a policy dial affects allocation alone. After
+  a completed full run for the current weekly inputs, use `reallocate` to apply
+  that change. It reuses the cached forecast.
+- Changed weekly sales or order inputs need a `full` run to rebuild the
+  forecast and allocation. Follow the upload's automatic run when it starts
+  one. If no usable full-run cache exists, start `full` before reallocation.
 - `get_run_results` is a summary. Use `query_plan` for a store/style question
   about the complete selected plan. The dashboard preview alone is incomplete.
 - A forward result recommends moves for an unobserved week. Historical audit
