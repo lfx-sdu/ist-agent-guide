@@ -8,7 +8,7 @@ require a separate, explicit user confirmation in chat.
 | Tool | What it does | Effect |
 |---|---|---|
 | `get_data_status` | Shows uploaded weeks, source freshness, and completeness. | Read |
-| `stage_workbooks` | Sends authorized Excel file references to IST staging. Client file handoff must be connected first. | Stages files |
+| `stage_workbooks` | Stages authorized Excel file references. The deployed MCP has no attachment fetcher yet, so chatbot uploads are currently unavailable. | Stages files when connected |
 | `validate_upload` | Rechecks a staged upload and reports weeks, changes, errors, and warnings. | Read/check |
 | `commit_upload` | Saves validated data. A changed upload may automatically start a full or reallocation run. | Writes data; may start run |
 | `get_import_job` | Follows a background import and its forecast `run_id`. | Read |

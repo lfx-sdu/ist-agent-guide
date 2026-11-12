@@ -5,6 +5,12 @@ direct Bearer token, but HTN's actual Claude and ChatGPT connector settings and
 attachment handoff still need account-level verification. Your IST administrator
 supplies the organization tokens privately.
 
+**Workbook upload:** The deployed MCP currently has no chatbot attachment
+fetcher, so an Excel file attached in Claude or ChatGPT cannot be uploaded to
+IST through `stage_workbooks` yet. Use the IST Data upload page for new files;
+the agent can still inspect existing data, change confirmed policy, run IST,
+analyze results, and download reports.
+
 ## Choose the environment
 
 | Environment | MCP endpoint |

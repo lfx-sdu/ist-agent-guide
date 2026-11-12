@@ -9,9 +9,10 @@ service code, customer data, endpoint credential, or token**.
 
 **Pilot status:** The production IST MCP endpoint is live, and the server accepts
 the production organization token. Connection and Excel attachment handling in
-HTN's actual Claude and ChatGPT workspaces are still being verified. The MCP
-URLs are in [CONNECT.md](CONNECT.md); an IST administrator provides each
-environment's token privately.
+HTN's actual Claude and ChatGPT workspaces are still being verified. Workbook
+upload from chat is currently unavailable because the server has no connected
+attachment fetcher. The MCP URLs are in [CONNECT.md](CONNECT.md); an IST
+administrator provides each environment's token privately.
 
 ## Start with your agent
 
