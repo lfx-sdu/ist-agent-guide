@@ -16,14 +16,16 @@ week. It asks for a missing file only when the service identifies one.
 
 **Planner:** “Here are the weekly workbooks. Check and run IST.”
 
-**Agent:** If file handoff is connected, stages the files, shows validation and
-changed weeks, then commits a clean authorized upload. It follows the import's
-forecast run ID instead of starting another run. It gives that ID promptly and
-can answer “How is my IST run going?” later with `get_run_status`.
+**Agent:** Checks filenames, sizes, and sheet weeks before sending files. If
+this chatbot can pass authorized file references, it uses `stage_workbooks`.
+Otherwise it calls `create_upload_ticket` and, if its runtime can send HTTP,
+POSTs the original files to the one-use URL. If it cannot send files, it gives
+the planner the ticket's file-picker link. It calls `validate_upload`, shows
+the affected weeks and warnings, then commits a clean authorized upload. It
+follows the import's forecast run ID instead of starting another run.
 
-If this chatbot cannot pass an attached Excel file to MCP, the agent says that
-upload is not connected. It does not claim the file was saved or convert the
-whole workbook into chat text.
+The agent never claims that a chat attachment was saved merely because it can
+read it, and it never converts the whole workbook into chat text.
 
 ## Change a setting
 

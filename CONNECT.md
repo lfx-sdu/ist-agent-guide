@@ -5,11 +5,13 @@ direct Bearer token, but HTN's actual Claude and ChatGPT connector settings and
 attachment handoff still need account-level verification. Your IST administrator
 supplies the organization tokens privately.
 
-**Workbook upload:** The deployed MCP currently has no chatbot attachment
-fetcher, so an Excel file attached in Claude or ChatGPT cannot be uploaded to
-IST through `stage_workbooks` yet. Use the IST Data upload page for new files;
-the agent can still inspect existing data, change confirmed policy, run IST,
-analyze results, and download reports.
+**Workbook upload:** The deployed MCP offers `create_upload_ticket`. A coding
+agent that can read the attached file and send HTTP can use its one-use URL to
+POST the original Excel bytes. If that runtime cannot send files, the agent can
+offer the same URL as a short-lived file-picker page; the planner selects the
+files there and returns to chat. The agent then calls `validate_upload`, shows
+the findings, and commits only the requested clean upload. Direct attachment
+handoff through `stage_workbooks` still needs a chatbot-specific fetcher.
 
 ## Choose the environment
 
@@ -72,12 +74,13 @@ writes only when the planner requests them:
 - `get_run_results` and `download_report` return the requested run's forward
   and audit files, including after a newer run has completed.
 - An Excel attached in chat can reach `stage_workbooks` through an authorized
-  file reference. If not, tell the IST team which file reference or connected
-  file store the chatbot offers; the server needs an adapter for it.
+  file reference, or the agent can read and POST it through a one-use upload
+  ticket. If neither works, the file-picker link is the fallback. Record which
+  path works in each chatbot account.
 - A long run can be followed by `get_run_status` after leaving and returning to
   the conversation. Note whether the chatbot can send an automatic completion
   message; on-demand status works regardless.
 
-The connector is not fully accepted for weekly upload until both chatbot
-accounts pass the attachment check. Do not send the raw token back to the IST
-team in a chat transcript.
+The connector is not fully accepted for direct chat attachment upload until
+both chatbot accounts pass that check. Do not send the raw token back to the
+IST team in a chat transcript.

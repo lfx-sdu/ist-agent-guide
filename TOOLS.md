@@ -8,7 +8,8 @@ require a separate, explicit user confirmation in chat.
 | Tool | What it does | Effect |
 |---|---|---|
 | `get_data_status` | Shows uploaded weeks, source freshness, and completeness. | Read |
-| `stage_workbooks` | Stages authorized Excel file references. The deployed MCP has no attachment fetcher yet, so chatbot uploads are currently unavailable. | Stages files when connected |
+| `create_upload_ticket` | Issues a short-lived, one-use URL and upload session ID. A coding agent can POST attached Excel bytes to it; otherwise the planner can use its file-picker page. | Enables staging; does not import |
+| `stage_workbooks` | Stages authorized Excel file references when this chatbot has a connected attachment fetcher. That direct handoff is not yet configured. | Stages files when connected |
 | `validate_upload` | Rechecks a staged upload and reports weeks, changes, errors, and warnings. | Read/check |
 | `commit_upload` | Saves validated data. A changed upload may automatically start a full or reallocation run. | Writes data; may start run |
 | `get_import_job` | Follows a background import and its forecast `run_id`. | Read |
@@ -25,6 +26,13 @@ require a separate, explicit user confirmation in chat.
 
 ## Tool choices that matter
 
+- Before sending a workbook, check its filename, size, Excel format, and sheet
+  weeks locally when the agent can access it. Report a filename/sheet-week
+  mismatch. The server's `validate_upload` result remains authoritative.
+- After a ticket upload, call `validate_upload` with its session ID and show
+  errors, warnings, affected weeks, and row-count changes before committing.
+  A coding agent keeps the one-use URL out of chat; share it only when the
+  planner needs the file-picker page.
 - An uploaded weekly sales/order change may start its own full run. Use the
   `run_id` in `get_import_job`; avoid a second `start_run` call.
 - Save a requested policy change **before** committing an upload that will

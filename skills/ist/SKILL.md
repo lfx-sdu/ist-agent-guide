@@ -17,10 +17,14 @@ user's production request.
 
 1. Call `get_data_status` before stating which weekly inputs are current.
 2. When the user attaches Excel files, call `stage_workbooks` only if this
-   chatbot's authorized file-reference handoff has been verified. Never send
-   workbook bytes or base64 through a model/tool text argument. If handoff is
-   unavailable, say upload is not connected yet; continue with read-only
-   analysis of existing data where useful.
+   chatbot's authorized file-reference handoff has been verified. Otherwise
+   call `create_upload_ticket`. If the agent can read the attached files and
+   send HTTP, inspect filenames, sizes, Excel format, and sheet weeks locally,
+   then POST the original bytes as multipart files under the ticket's field
+   names. Report filename/sheet-week discrepancies. Keep the URL out of chat
+   when code can use it. If code cannot send files, share the one-use file-picker
+   link with the planner and wait for them to select files. Never send workbook
+   bytes or base64 through a model/tool text argument.
 3. Show `validate_upload` weeks, changed/missing sources, errors, and warnings.
    Resolve a destructive replace or week remap with the user before committing.
 4. If the same request includes a policy change, preview it and get the user's

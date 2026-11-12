@@ -9,10 +9,12 @@ service code, customer data, endpoint credential, or token**.
 
 **Pilot status:** The production IST MCP endpoint is live, and the server accepts
 the production organization token. Connection and Excel attachment handling in
-HTN's actual Claude and ChatGPT workspaces are still being verified. Workbook
-upload from chat is currently unavailable because the server has no connected
-attachment fetcher. The MCP URLs are in [CONNECT.md](CONNECT.md); an IST
-administrator provides each environment's token privately.
+HTN's actual Claude and ChatGPT workspaces are still being verified. An agent
+that can read an attached workbook and send HTTP can stage it through a one-use
+upload ticket; other chat clients can offer the ticket's file-picker link.
+Direct chatbot attachment handoff to MCP remains unverified. The MCP URLs are
+in [CONNECT.md](CONNECT.md); an IST administrator provides each environment's
+token privately.
 
 ## Start with your agent
 
@@ -22,6 +24,9 @@ Give your agent this public repository URL and say:
 > connect to the IST test endpoint in CONNECT.md. I will enter its token in the
 > connector's secure credential field; do not ask me to paste it into chat.
 > After connection, check the latest test data week and explain the tools.
+> Before uploading any attached Excel file, tell me its filename, size, and
+> sheet weeks. Use IST's one-use upload ticket to stage it for validation.
+> Show the validation result before saving it.
 > Use production only when I ask you to switch to it.
 
 If your chatbot cannot open a GitHub URL, add [AGENTS.md](AGENTS.md) and

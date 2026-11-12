@@ -22,8 +22,10 @@ connected, follow [the IST skill](skills/ist/SKILL.md). Read
   planner the environment, latest source week, and whether data is complete.
 - Do not assume a file attached to chat is available to MCP. Use
   `stage_workbooks` only after this client's authorized file-reference handoff
-  has been verified. If it is unavailable, say that upload is not connected yet;
-  IST status, analysis, and existing report downloads can still be used.
+  has been verified. Otherwise use `create_upload_ticket`: inspect an attached
+  workbook locally and POST its original bytes if this agent can send HTTP. If
+  it cannot, give the planner the one-use file-picker link. Use the returned
+  session ID to validate in chat before importing.
 
 ## Running IST
 
