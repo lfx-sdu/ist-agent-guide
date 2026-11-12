@@ -7,9 +7,11 @@ connected, follow [the IST skill](skills/ist/SKILL.md). Read
 
 ## Connection
 
-- Ask only whether the administrator has supplied the MCP URL and organization
-  token. **Never ask the planner to paste the token into chat.** Direct them to
-  the chatbot's secure connector credential field.
+- Use the test and production URLs in [CONNECT.md](CONNECT.md). Ask which
+  environment the planner wants if it is unclear; start with test during setup.
+  The administrator supplies a different token for each environment. **Never
+  ask the planner to paste a token into chat.** Direct them to the chatbot's
+  secure connector credential field.
 - Do not use the old IST portal password as the MCP token. The two credentials
   are separate.
 - Check whether this chatbot offers a remote MCP connector and a secure custom
@@ -17,7 +19,7 @@ connected, follow [the IST skill](skills/ist/SKILL.md). Read
   controls actually visible to the planner. If it offers only OAuth, report that
   fact to the IST administrator. Do not invent an authorization URL.
 - After connection, check the IST tool list and call `get_data_status`. Tell the
-  planner the latest source week and whether data is complete.
+  planner the environment, latest source week, and whether data is complete.
 - Do not assume a file attached to chat is available to MCP. Use
   `stage_workbooks` only after this client's authorized file-reference handoff
   has been verified. If it is unavailable, say that upload is not connected yet;
@@ -25,6 +27,8 @@ connected, follow [the IST skill](skills/ist/SKILL.md). Read
 
 ## Running IST
 
+- Before an upload, policy save, or run, name the connected environment. A
+  successful test does not itself authorize the same action in production.
 - A saved configuration persists across weeks. For **every** change, show the
   exact `preview_config_change` diff and warnings, wait for a new user reply
   confirming that diff, then call `apply_config_change`.

@@ -9,17 +9,19 @@ service code, customer data, endpoint credential, or token**.
 
 **Pilot status:** The production IST MCP endpoint is live, and the server accepts
 the production organization token. Connection and Excel attachment handling in
-HTN's actual Claude and ChatGPT workspaces are still being verified. An IST
-administrator will provide the MCP URL and shared organization token privately.
+HTN's actual Claude and ChatGPT workspaces are still being verified. The MCP
+URLs are in [CONNECT.md](CONNECT.md); an IST administrator provides each
+environment's token privately.
 
 ## Start with your agent
 
 Give your agent this public repository URL and say:
 
-> Read https://github.com/lfx-sdu/ist-agent-guide/blob/main/AGENTS.md. Help me connect IST to this
-> chatbot. Tell me where to enter the admin-provided MCP URL and token securely;
-> do not ask me to paste the token into this conversation. After connection,
-> check our latest IST data week and explain the available tools.
+> Read https://github.com/lfx-sdu/ist-agent-guide/blob/main/AGENTS.md. Help me
+> connect to the IST test endpoint in CONNECT.md. I will enter its token in the
+> connector's secure credential field; do not ask me to paste it into chat.
+> After connection, check the latest test data week and explain the tools.
+> Use production only when I ask you to switch to it.
 
 If your chatbot cannot open a GitHub URL, add [AGENTS.md](AGENTS.md) and
 [CONNECT.md](CONNECT.md) as its reference documents. Agents that support a
@@ -32,7 +34,8 @@ enable it once.
 - [Example conversations](docs/EXAMPLES.md)
 - [IST operating skill](skills/ist/SKILL.md)
 
-**Shared-token access:** The HTN organization token can upload data, change
-policy, and start runs in both chatbots. Keep it in each connector's secret
-setting, never in a prompt or file. IST records actions under one organization
-identity, so it cannot identify which planner made a change.
+**Shared-token access:** Test and production have different HTN organization
+tokens. Within one environment, its token can be used by both chatbots to upload
+data, change policy, and start runs. Keep each token in its connector's secret
+setting, never in chat, a workbook, or this repository. IST records actions under
+one organization identity, so it cannot identify which planner made a change.

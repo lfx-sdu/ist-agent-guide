@@ -9,6 +9,10 @@ If IST is not connected, use [CONNECT.md](../../CONNECT.md) to guide setup. Neve
 ask the user to paste the organization token into chat. The public guide repo
 contains instructions, not credentials or service code.
 
+Before an upload, policy save, or run, name the connected environment. A test
+action does not itself authorize the same action in production; wait for the
+user's production request.
+
 ## Weekly work
 
 1. Call `get_data_status` before stating which weekly inputs are current.

@@ -3,17 +3,20 @@
 **Current status:** This is a pilot guide. The production MCP service accepts a
 direct Bearer token, but HTN's actual Claude and ChatGPT connector settings and
 attachment handoff still need account-level verification. Your IST administrator
-supplies the production MCP URL and organization token separately.
+supplies the organization tokens privately.
 
-## What the administrator gives you
+## Choose the environment
 
-1. An IST MCP endpoint URL. It ends in `/mcp`.
-2. One reusable HTN organization token, sent through a secure password-manager
-   share or another approved private channel.
+| Environment | MCP endpoint |
+|---|---|
+| Test (isolated data) | `https://ist-sea-dev-agtest-backend.grayisland-a9bf3b94.southeastasia.azurecontainerapps.io/mcp` |
+| Production (live IST data) | `https://ist-sea-dev-backend.grayisland-a9bf3b94.southeastasia.azurecontainerapps.io/mcp` |
 
-Neither item is in this public repository. The token grants IST read, upload,
-config-change, and run capabilities. Everyone using it shares one audit identity;
-the administrator can revoke or rotate it for both chatbots.
+Start with test. The IST administrator supplies a **different reusable token for
+each environment** through a private channel. Each token grants IST read,
+upload, config-change, and run capabilities in its own environment. Everyone
+using one token shares one audit identity; the administrator can revoke or
+rotate it for both chatbots. No token is in this public repository.
 
 ## Connect in your chatbot
 
@@ -21,15 +24,17 @@ The exact menu names depend on the chatbot and workspace plan. Ask your agent to
 guide you through the controls it can see.
 
 1. Have a workspace administrator enable a **remote MCP connector** for IST.
-2. Enter the administrator-provided URL as the server endpoint.
+2. Enter the selected environment's URL from the table above. If your chatbot
+   supports two connections, name them “IST Test” and “IST Production”.
 3. If the connector offers a secure **Bearer token** or **API token** field,
-   enter the IST organization token there once. Never paste it into a chat,
+   enter that environment's token there once. Never paste it into a chat,
    instruction, GitHub issue, or workbook.
 4. If the connector offers **OAuth only**, stop and tell the IST administrator.
    The shared token needs an IST OAuth connection bridge for that client; the
    old portal login is not that bridge.
 5. Ask your agent: “Check the latest IST data week.” It should call
-   `get_data_status`, name the week and freshness, and show no token value.
+   `get_data_status`, name the environment, week, and freshness, and show no
+   token value. Switch to production only when you explicitly ask for it.
 6. Ask for a completed run by its run ID and request both forward and audit
    Excel reports. Download links are short-lived and single-use; the agent can
    issue a new link when needed.
@@ -52,7 +57,9 @@ authorized file reference.
 
 ## Connection check for the administrator
 
-In **both** HTN workspaces, verify:
+In **both** HTN workspaces, complete these checks in test first. For production,
+use its own URL and token, repeat the tool and data-status checks, and perform
+writes only when the planner requests them:
 
 - The shared token connects without being exposed in chat.
 - `get_data_status` returns the expected latest week.
