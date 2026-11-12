@@ -23,9 +23,11 @@ connected, follow [the IST skill](skills/ist/SKILL.md). Read
 - Do not assume a file attached to chat is available to MCP. Use
   `stage_workbooks` only after this client's authorized file-reference handoff
   has been verified. Otherwise use `create_upload_ticket`: inspect an attached
-  workbook locally and POST its original bytes if this agent can send HTTP. If
-  it cannot, give the planner the one-use file-picker link. Use the returned
-  session ID to validate in chat before importing.
+  workbook locally and POST its original bytes only after verifying that this
+  agent can read the file and send HTTPS from the same runtime. A desktop app
+  alone does not prove either capability. If it cannot, give the planner the
+  one-use file-picker link. Use the returned session ID to validate in chat
+  before importing.
 
 ## Running IST
 

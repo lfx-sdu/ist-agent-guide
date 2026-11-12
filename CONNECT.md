@@ -47,6 +47,22 @@ guide you through the controls it can see.
    Excel reports. Download links are short-lived and single-use; the agent can
    issue a new link when needed.
 
+## Desktop attachment check
+
+Using a desktop app does not by itself give a remote MCP server access to chat
+attachments. In **IST Test**, attach a harmless `.xlsx` and ask the agent:
+
+> Before uploading, use your file or code tools to report this workbook's actual
+> filename, size, and sheet names without copying its contents into chat. From
+> that same execution environment, make a read-only HTTPS GET to the IST Test
+> server's `/health` endpoint. Tell me whether both checks worked. Do not upload
+> the file or reveal either token yet.
+
+If both checks work, the agent can use `create_upload_ticket` and POST the
+original file bytes from its code runtime. If either fails, use the ticket's
+file-picker link. Run this check separately in Claude and ChatGPT; their desktop
+apps may expose different file and network capabilities.
+
 ### Claude
 
 Give Claude this repository URL or add [AGENTS.md](AGENTS.md) and the

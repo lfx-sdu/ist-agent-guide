@@ -19,9 +19,10 @@ user's production request.
 2. When the user attaches Excel files, call `stage_workbooks` only if this
    chatbot's authorized file-reference handoff has been verified. Otherwise
    call `create_upload_ticket`. If the agent can read the attached files and
-   send HTTP, inspect filenames, sizes, Excel format, and sheet weeks locally,
-   then POST the original bytes as multipart files under the ticket's field
-   names. Report filename/sheet-week discrepancies. Keep the URL out of chat
+   send HTTPS from the same runtime, inspect filenames, sizes, Excel format,
+   and sheet weeks locally, then POST the original bytes as multipart files
+   using the ticket's field names. Report filename/sheet-week discrepancies.
+   Keep the URL out of chat
    when code can use it. If code cannot send files, share the one-use file-picker
    link with the planner and wait for them to select files. Never send workbook
    bytes or base64 through a model/tool text argument.
