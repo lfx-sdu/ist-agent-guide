@@ -7,11 +7,10 @@ connected, follow [the IST skill](skills/ist/SKILL.md). Read
 
 ## Connection
 
-- Use the test and production URLs in [CONNECT.md](CONNECT.md). Ask which
-  environment the planner wants if it is unclear; start with test during setup.
-  The administrator supplies a different token for each environment. **Never
-  ask the planner to paste a token into chat.** Direct them to the chatbot's
-  secure connector credential field.
+- Use the environment chosen by the planner and its public URL in
+  [CONNECT.md](CONNECT.md). If the environment is unclear, ask for its name.
+  Use test for practice. Direct the planner to enter the token in the secure
+  connector credential field and keep the access file out of chat.
 - Do not use the old IST portal password as the MCP token. The two credentials
   are separate.
 - Check whether this chatbot offers a remote MCP connector and a secure custom

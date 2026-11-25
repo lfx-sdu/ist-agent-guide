@@ -18,31 +18,34 @@ handoff through `stage_workbooks` still needs a chatbot-specific fetcher.
 | Environment | MCP endpoint |
 |---|---|
 | Test (isolated data) | `https://ist-sea-dev-agtest-backend.grayisland-a9bf3b94.southeastasia.azurecontainerapps.io/mcp` |
-| Production (live IST data) | `https://ist-sea-dev-backend.grayisland-a9bf3b94.southeastasia.azurecontainerapps.io/mcp` |
+| Production (live Korea IST data) | `https://ist.sdu-alchemist.org/mcp` |
 
-Start with test. The IST administrator supplies a **different reusable token for
-each environment** through a private channel. Each token grants IST read,
-upload, config-change, and run capabilities in its own environment. Everyone
-using one token shares one audit identity; the administrator can revoke or
-rotate it for both chatbots. No token is in this public repository.
+Use the environment named in your access file. For practice, request access to
+**IST Test**. The administrator supplies credentials privately. Each token
+grants IST read, upload, config-change, and run capabilities in its own
+environment. Production tokens can be revoked individually and all actions use
+the same HTN organization audit identity.
 
 ## Connect in your chatbot
 
 The exact menu names depend on the chatbot and workspace plan. Ask your agent to
 guide you through the controls it can see.
 
-1. Have a workspace administrator enable a **remote MCP connector** for IST.
+1. Have a workspace administrator enable a **remote Streamable HTTP MCP connector** for IST.
 2. Enter the selected environment's URL from the table above. If your chatbot
    supports two connections, name them “IST Test” and “IST Production”.
 3. If the connector offers a secure **Bearer token** or **API token** field,
-   enter that environment's token there once. Never paste it into a chat,
-   instruction, GitHub issue, or workbook.
+   enter that environment's token there once. If the connector has a secure
+   custom header field, enter the `Authorization` header from the access file.
+   Keep the authorization value in the connector's secure settings. Share only
+   the environment name or public URL in chat. Keep the private access file
+   out of chat and attachments.
 4. If the connector offers **OAuth only**, stop and tell the IST administrator.
    The shared token needs an IST OAuth connection bridge for that client; the
    old portal login is not that bridge.
 5. Ask your agent: “Check the latest IST data week.” It should call
    `get_data_status`, name the environment, week, and freshness, and show no
-   token value. Switch to production only when you explicitly ask for it.
+   token value. Confirm the environment before requesting any production write.
 6. Ask for a completed run by its run ID and request both forward and audit
    Excel reports. Download links are short-lived and single-use; the agent can
    issue a new link when needed.
